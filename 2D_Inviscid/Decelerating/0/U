@@ -1,0 +1,80 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  11
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format          ascii;
+    class           volVectorField;
+    object          U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [ 0 1 -1 0 0 0 0 ];
+
+u_mag           2.5;
+
+alphaDeg        0;
+
+internalField   uniform ( #calc "$u_mag*cos(degToRad($alphaDeg))" #calc "$u_mag*sin(degToRad($alphaDeg))" 0 );
+
+boundaryField
+{
+    inlet
+    {
+    type codedFixedValue;
+    value uniform (0 0 0);
+
+    name timeDependentInlet;
+
+    code
+    #{
+    const scalar t = this->db().time().value();
+
+    scalar Umag = 2.5 - 0.1*floor(t/10.0);
+
+    // cap at 1.3
+    if (Umag < 1.3)
+    {
+        Umag = 1.3;
+    }
+
+    scalar alphaDeg = 0;
+    scalar alphaRad = degToRad(alphaDeg);
+
+    scalar Ux = Umag*cos(alphaRad);
+    scalar Uy = Umag*sin(alphaRad);
+
+    vector Uin(Ux, Uy, 0);
+
+    operator==(Uin);
+    #};
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
+    upperairfoil
+    {
+        type            slip;
+    }
+    lowerairfoil
+    {
+        type            slip;
+    }
+    front
+    {
+        type            empty;
+    }
+    back
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //
+

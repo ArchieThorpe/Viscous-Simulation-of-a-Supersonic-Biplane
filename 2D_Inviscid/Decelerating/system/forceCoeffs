@@ -1,0 +1,32 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  11
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+forceCoeffs1
+{
+    type            forceCoeffs;
+    libs            ( "libforces.so" );
+    writeControl    runTime;
+    writeInterval   1;
+    patches         ( upperairfoil && lowerairfoil );
+    u_mag           1.7;
+    alphaDeg        0;
+    rhoInf          1.4;
+    CofR            ( 0 0 0 );
+    liftDir         ( #calc "-sin(degToRad($alphaDeg))" #calc "cos(degToRad($alphaDeg))" 0 );
+    dragDir         ( #calc "cos(degToRad($alphaDeg))" #calc "sin(degToRad($alphaDeg))" 0 );
+    pitchAxis       ( 0 0 1 );
+    magUInf         #calc "$u_mag";
+    lRef            1;
+    Aref            1;
+}
+
+u_mag           1.7;
+
+alphaDeg        0;
+
+
+// ************************************************************************* //
