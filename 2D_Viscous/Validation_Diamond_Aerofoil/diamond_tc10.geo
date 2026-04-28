@@ -1,4 +1,3 @@
-// Archie Thorpe - gwmc82@durham.ac.uk - archiethorpe@aol.com
 // 2D structured mesh for a 10% thickness-chord diamond aerofoil
 
 SetFactory("Built-in");
