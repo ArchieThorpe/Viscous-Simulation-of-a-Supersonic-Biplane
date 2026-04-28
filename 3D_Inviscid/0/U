@@ -1,0 +1,53 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  13
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+u_mag           1.7;
+
+alphaDeg        0;
+
+internalField   uniform ( #calc "$u_mag*cos(degToRad($alphaDeg))" #calc "$u_mag*sin(degToRad($alphaDeg))" 0 );
+
+boundaryField
+{
+   inlet
+    {
+	type            fixedValue;
+    	value		uniform ( #calc "$u_mag*cos(degToRad($alphaDeg))" #calc "$u_mag*sin(degToRad($alphaDeg))" 0 );
+    }
+
+   outlet
+    {
+        type            zeroGradient;
+    }
+
+   wing
+    {
+        type            slip;
+    }
+
+   RootWall
+    {
+        type            slip;
+    }
+
+   FreeEnd
+    {
+        type            zeroGradient;
+    }
+}
+
+// ************************************************************************* //
