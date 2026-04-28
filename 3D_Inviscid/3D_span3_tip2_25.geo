@@ -1,4 +1,3 @@
-// Archie Thorpe - gwmc82@durham.ac.uk - archiethorpe@aol.com
 // This 3D unstructured mesh made by adapting files provided by:
 // https://github.com/tbellosta/CFD2020/tree/master/DIAMOND
 // https://github.com/Tjcross31/OPTIMISATION-OF-BIPLANECONFIGURATIONS-FOR-SUPERSONICFLIGHT
