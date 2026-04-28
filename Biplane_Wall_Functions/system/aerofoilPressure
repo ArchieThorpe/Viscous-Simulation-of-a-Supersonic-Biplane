@@ -1,0 +1,21 @@
+aerofoilSurfacePressure
+{
+    type            surfaces;
+    libs            ("libsampling.so");
+
+    writeControl    writeTime;
+    surfaceFormat   raw;
+    interpolationScheme cellPoint;
+
+    fields          (p);
+
+    surfaces
+    (
+        aerofoilSurface
+        {
+            type        patch;
+            patches     (upperairfoil lowerairfoil);
+            interpolate true;
+        }
+    );
+}
