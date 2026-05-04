@@ -1,4 +1,4 @@
-Pseudo-transient viscous simulation (boundary layer full resolved) at Mach 1.7 for a 2D biplane with zero stagger and zero angle of attack.
+Pseudo-transient viscous simulation (boundary layer fully resolved) at Mach 1.7 for a 2D biplane with zero stagger and zero angle of attack.
 
 This case is setup and ready-to-run.
 
